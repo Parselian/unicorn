@@ -1,2 +1,7 @@
 name = "unicorn"
 account_id = "89ef82c590cb707f950bdbd3df8bb5fd"
+workers_dev = true
+route = ''
+zone_id = ''
+usage_model = ''
+type = 'javascript'
