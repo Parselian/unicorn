@@ -1,29 +1,48 @@
-const { WebClient } = require('@slack/web-api'),
-  TOKEN = process.env.SLACK_TOKEN,
-  web = new WebClient(TOKEN)
+import lookup from './src/handlers/lookup'
+import webhook from './src/handlers/webhook'
+import Router from './router'
 
-addEventListener('fetch', (event) => {
-  try {
-    event.respondWith(sendMessage(event))
-  } catch (error) {
-    event.respondWith(new Response('Internal Error', { status: 500 }))
-  }
+
+addEventListener("fetch", (e) => {
+  e.respondWith(handleRequest(e.request))
 })
 
-async function sendMessage(channel, message) {
-  console.log('called');
+async function handleRequest(request) {
+  const router = new Router()
 
-  if (new Date().getUTCHours() === 7 && new Date().getUTCMinutes() === 0) {
+  router.post("/lookup", lookup)
+  router.post("/webhook", webhook)
+
+  let response = await router.route(request)
+
+  if (!response) {
+    response = new Response("Not found", {status: 404})
+  }
+
+  return response
+}
+
+// const { WebClient, LogLevel } = require('@slack/web-api'),
+//   TOKEN = process.env.SLACK_TOKEN || 'sDDE51nLNtQRRTUr7FCQ1RS6',
+//   web = new WebClient(TOKEN)
+
+/*
+async function handleRequest(request) {
+  if (new Date().getUTCHours() === 11 && new Date().getUTCMinutes() === 56) {
     const client = new WebClient(TOKEN, {
       logLevel: LogLevel.DEBUG,
     });
 
     console.log('worked');
 
-    client.chat.postMessage({
-      token: AUTH_TOKEN,
-      channel: `#${channel}`,
-      text: message,
-    });
+    const result = JSON.stringify(client.chat.postMessage({
+      channel: `#test-bot`,
+      text: 'testestest',
+    }));
+
+    return new Response( result, { headers: { 'Content-type': 'application/json' } });
+  } else {
+    return new Response('you`re late')
   }
 }
+*/
