@@ -32,6 +32,37 @@ class Router {
   post(url, handler) {
     return this.handle([Post, Path(url)], handler)
   }
+
+  route(req) {
+    const route = this.resolve(req)
+
+    if (route) {
+      return route.handler(req)
+    }
+
+    return new Response('resource not found', {
+      status: 404,
+      statusText: 'not found',
+      headers: {
+        'content-type': 'text/plain',
+      },
+    })
+  }
+
+  // resolve returns the matching route, if any
+  resolve(request) {
+    return this.routes.find(route => {
+      if (!route.conditions || (Array.isArray(route) && !route.conditions.length)) {
+        return true
+      }
+
+      if (typeof route.conditions === 'function') {
+        return route.conditions(request)
+      }
+
+      return route.conditions.every(c => c(request))
+    })
+  }
 }
 
 export default Router

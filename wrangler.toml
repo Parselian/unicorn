@@ -1,12 +1,8 @@
-# name = "unicorn"
-# account_id = "89ef82c590cb707f950bdbd3df8bb5fd"
-# type = 'webpack'
-# workers_dev = true
-# webpack_config = "webpack.config.js"
+name = "unicorn"
+account_id = "89ef82c590cb707f950bdbd3df8bb5fd"
+type = 'webpack'
+workers_dev = true
+webpack_config = "webpack.config.js"
+route = "https://unicorn.vyacheslav-job9175.workers.dev/*"
 
-BUCKET_NAME="unicorn"
-CLOUDFLARE_ACCOUNT_ID="89ef82c590cb707f950bdbd3df8bb5fd"
-CLOUDFLARE_AUTH_EMAIL=""
-CLOUDFLARE_AUTH_KEY=""
-CLOUDFLARE_ZONE_ID=""
-WORKER_ROUTE="https://unicorn.vyacheslav-job9175.workers.dev/*"
+compatibility_date = "2022-01-18"
