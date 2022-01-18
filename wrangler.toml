@@ -1,7 +1,0 @@
-name = "unicorn"
-account_id = "89ef82c590cb707f950bdbd3df8bb5fd"
-type = 'webpack'
-workers_dev = true
-webpack_config = "webpack.config.js"
-
-compatibility_date = "2022-01-18"
