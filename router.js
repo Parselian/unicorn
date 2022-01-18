@@ -33,11 +33,12 @@ class Router {
     return this.handle([Post, Path(url)], handler)
   }
 
-  route(req) {
-    const route = this.resolve(req)
+  route(request) {
+    console.log('test route')
+    const route = this.resolve(request)
 
     if (route) {
-      return route.handler(req)
+      return route.handler(request)
     }
 
     return new Response('resource not found', {
@@ -60,7 +61,7 @@ class Router {
         return route.conditions(request)
       }
 
-      return route.conditions.every(c => c(request))
+      return route.conditions.every(condition => condition(request))
     })
   }
 }

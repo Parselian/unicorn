@@ -2,3 +2,6 @@
 /.idea
 /dist
 /worker
+/src/config.js
+.env
+wrangler.toml

@@ -1,4 +1,5 @@
-import {constructGhIssueSlackMessage} from "../utils/slack"
+import { SLACK_WEBHOOK_URL } from "../config"
+import { constructGhIssueSlackMessage } from "../utils/slack"
 
 export default async (request) => {
   try {

@@ -7,6 +7,7 @@ addEventListener("fetch", (e) => {
   e.respondWith(handleRequest(e.request))
 })
 
+  console.log(12)
 async function handleRequest(request) {
   const router = new Router()
 
